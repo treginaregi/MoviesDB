@@ -1,0 +1,6 @@
+export { Home } from "./Home/index"
+export { Popular } from "./Popular/index"
+export { Rated } from "./Rated/index"
+export { Playing } from "./Playing/index"
+export { Favorite } from "./Favorite/index"
+export { Show } from "./Show/index"
