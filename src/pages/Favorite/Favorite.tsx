@@ -8,14 +8,14 @@ import { useNavigate } from 'react-router-dom';
 const Favorite = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [show, setShow] = useState<IMovieDetail[]>([]);
-    const favorites: string = localStorage.getItem('favorites') || '';
+    const favorites: string[] = JSON.parse(localStorage.getItem('favorites') || '[]');
     const navigate = useNavigate();
 
     const runGetFavorite = async () => {
-        if(favorites.length > 0){
-            const favoritesArray = JSON.parse(favorites);
+        console.log(favorites);
+        
             const newShows = await Promise.all(
-                favoritesArray.map(async (favorites:string) => {
+                favorites.map(async (favorites:string) => {
                     return getInfo(String(favorites))
                     .then((res: AxiosResponse) => res.data)
                     .catch((err: Error) => console.log(err));
@@ -23,7 +23,7 @@ const Favorite = () => {
             );
             setShow(newShows);
             setLoading(false);
-        }
+        
     };
 
     useEffect(() => {
